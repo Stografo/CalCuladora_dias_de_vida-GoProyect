@@ -19,8 +19,10 @@ func main() {
 	bytes := []byte(fechaN)
 	bucleArray := []int{}
 	datosManejables := []int{}
+
 	for index := range bytes {
 		index := index
+
 		bucleArray = append(bucleArray, int(bytes[index]))
 		if bucleArray[index] != 47 {
 			datosManejables = append(datosManejables, int(bytes[index]))
@@ -71,7 +73,7 @@ func main() {
 		}
 	}
 	dia := 0
-	fmt.Println(numeros)
+
 	switch {
 	case numeros[0] != "0":
 		aux := string(numeros[0]) + string(numeros[1])
@@ -85,6 +87,7 @@ func main() {
 	fmt.Println("dia ", dia)
 
 	mes := 0
+
 	switch {
 	case numeros[2] == "0":
 		mes, _ = strconv.Atoi(numeros[3])
@@ -94,5 +97,25 @@ func main() {
 
 	}
 	fmt.Println("mes ", mes)
+
+	yearString := numeros[len(numeros)-4] + numeros[len(numeros)-3] + numeros[len(numeros)-2] + numeros[len(numeros)-1]
+	yearInt, _ := strconv.Atoi(yearString)
+	fmt.Println("year", yearInt)
+
+	diasMes := diasMes(mes)
+	fmt.Println(diasMes)
+
+}
+func diasMes(mes int) int {
+	switch {
+	case mes == 2:
+		return 28
+	case mes == 4 || mes == 6 || mes == 9 || mes == 11:
+		return 30
+	case mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12:
+		return 31
+	}
+
+	return 0
 
 }
