@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -96,26 +97,67 @@ func main() {
 		mes, _ = strconv.Atoi(aux)
 
 	}
-	fmt.Println("mes ", mes)
 
 	yearString := numeros[len(numeros)-4] + numeros[len(numeros)-3] + numeros[len(numeros)-2] + numeros[len(numeros)-1]
 	yearInt, _ := strconv.Atoi(yearString)
-	fmt.Println("year", yearInt)
+
+	//fecha actual
+	year, _, _ := time.Now().Date()
 
 	diasMes := diasMes(mes)
-	fmt.Println(diasMes)
+	diasYear := diasYear(yearInt, year)
+	//me falta restar el mes y el dia actual
+	diasDeVida := (diasYear + diasMes + dia)
+
+	fmt.Println("Has vivido ", diasDeVida)
 
 }
 func diasMes(mes int) int {
+	enero := 31
+	febrero := 28
+	marzo := 31
+	abril := 30
+	mayo := 31
+	junio := 30
+	julio := 31
+	agosto := 31
+	septiembre := 30
+	octubre := 31
+	noviembre := 30
+	diciembre := 31
 	switch {
+	case mes == 1:
+		return enero
 	case mes == 2:
-		return 28
-	case mes == 4 || mes == 6 || mes == 9 || mes == 11:
-		return 30
-	case mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12:
-		return 31
+		return enero + febrero
+	case mes == 3:
+		return enero + febrero + marzo
+	case mes == 4:
+		return enero + febrero + marzo + abril
+	case mes == 5:
+		return enero + febrero + marzo + abril + mayo
+	case mes == 6:
+		return enero + febrero + marzo + abril + mayo + junio
+	case mes == 7:
+		return enero + febrero + marzo + abril + mayo + junio + julio
+	case mes == 8:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto
+	case mes == 9:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre
+	case mes == 10:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre + octubre
+	case mes == 11:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre + octubre + noviembre
+	case mes == 12:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre + octubre + noviembre + diciembre
+
 	}
 
 	return 0
 
+}
+
+func diasYear(yearInt int, year int) int {
+
+	return (year - yearInt) * 365
 }
