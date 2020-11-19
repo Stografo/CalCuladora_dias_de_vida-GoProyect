@@ -85,7 +85,6 @@ func main() {
 		dia, _ = strconv.Atoi(numeros[1])
 
 	}
-	fmt.Println("dia ", dia)
 
 	mes := 0
 
@@ -102,16 +101,64 @@ func main() {
 	yearInt, _ := strconv.Atoi(yearString)
 
 	//fecha actual
-	year, _, _ := time.Now().Date()
+	year, _, d := time.Now().Date()
 
-	diasMes := diasMes(mes)
+	diasMes := mesIntFunc() - diasMes(mes)
 	diasYear := diasYear(yearInt, year)
 	//me falta restar el mes y el dia actual
-	diasDeVida := (diasYear + diasMes + dia)
 
-	fmt.Println("Has vivido ", diasDeVida)
+	diasDeVida := (diasYear + diasMes + d - dia)
+
+	fmt.Println("Tienes", diasDeVida, "dias de vida")
 
 }
+
+//esta funcion va a devolver la suma de los dias de los meses dependiendo
+func mesIntFunc() int {
+	enero := 31
+	febrero := 28
+	marzo := 31
+	abril := 30
+	mayo := 31
+	junio := 30
+	julio := 31
+	agosto := 31
+	septiembre := 30
+	octubre := 31
+	noviembre := 30
+	diciembre := 31
+	_, mes, _ := time.Now().Date()
+	switch {
+	case mes == time.January:
+		return enero
+	case mes == time.February:
+		return enero + febrero
+	case mes == time.March:
+		return enero + febrero + marzo
+	case mes == time.April:
+		return enero + febrero + marzo + abril
+	case mes == time.May:
+		return enero + febrero + marzo + abril + mayo
+	case mes == time.June:
+		return enero + febrero + marzo + abril + mayo + junio
+	case mes == time.July:
+		return enero + febrero + marzo + abril + mayo + junio + julio
+	case mes == time.August:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto
+	case mes == time.September:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre
+	case mes == time.October:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre + octubre
+	case mes == time.November:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre + octubre + noviembre
+	case mes == time.December:
+		return enero + febrero + marzo + abril + mayo + junio + julio + agosto + septiembre + octubre + noviembre + diciembre
+	}
+	return 0
+}
+
+//esta funcion devuelve un nuemro dependiendo en mes de nacimiento ejemplo octubre es igual a 31+(todos los meces anteriores)
+//osea regresa la suma de los dias corespondientes al mes
 func diasMes(mes int) int {
 	enero := 31
 	febrero := 28
@@ -157,6 +204,7 @@ func diasMes(mes int) int {
 
 }
 
+//esta funcion devuelve la resta entre el no de naciminto y el ano actual
 func diasYear(yearInt int, year int) int {
 
 	return (year - yearInt) * 365
