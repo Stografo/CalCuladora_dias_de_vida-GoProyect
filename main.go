@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+//version 0.1
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	//3 10 2001
